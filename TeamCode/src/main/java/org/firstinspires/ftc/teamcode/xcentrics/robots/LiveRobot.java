@@ -5,6 +5,9 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.xcentrics.components.live.Camera;
+import org.firstinspires.ftc.teamcode.xcentrics.components.live.Intake;
 import org.firstinspires.ftc.teamcode.xcentrics.components.live.Launcher;
 
 public class LiveRobot extends Robot{
@@ -13,7 +16,6 @@ public class LiveRobot extends Robot{
     public Camera       camera;
     public Intake       intake;
     public Launcher     launcher;
-
     TelemetryManager    panelsTelemetry;
 
     {
@@ -22,6 +24,10 @@ public class LiveRobot extends Robot{
 
     public LiveRobot(LinearOpMode opMode){
         super(opMode);
+        Follower = Constants.createFollower(hwmap);
+        camera   = new Camera(this);
+        intake   = new Intake(this);
+        launcher = new Launcher(this);
     }
 
     @Override
