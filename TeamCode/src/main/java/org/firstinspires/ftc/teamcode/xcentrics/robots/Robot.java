@@ -32,6 +32,8 @@ class RobotConfig {
     public static int TELEMETRY_CYCLE = 40;
     // Interval in cycles at which we calculate cycle frequency
     public static int FREQ_CHECK_CYCLE = 40;
+    //what aliance we are on
+    public static boolean isRed = false;
 }
 
 public class Robot {
