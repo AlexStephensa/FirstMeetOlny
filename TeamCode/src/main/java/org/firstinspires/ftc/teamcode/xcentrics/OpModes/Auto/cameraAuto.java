@@ -6,12 +6,12 @@ import org.firstinspires.ftc.teamcode.xcentrics.paths.AutoPathsRed;
 
 public class cameraAuto extends LiveAutoBase{
     private AutoPaths paths;
-    public static boolean isRed = false;
+
     public static int state = -1;
     @Override
     public void on_init() {
 
-        if(isRed){
+        if(robot.isRed()){
             paths = new AutoPathsRed(robot.follower);
         } else {
             paths = new AutoPathsBlue(robot.follower);
