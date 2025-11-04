@@ -7,6 +7,7 @@ import static org.firstinspires.ftc.teamcode.xcentrics.robots.RobotConfig.BULK_R
 import static org.firstinspires.ftc.teamcode.xcentrics.robots.RobotConfig.COMPONENT_UPDATE_CYCLE;
 import static org.firstinspires.ftc.teamcode.xcentrics.robots.RobotConfig.FREQ_CHECK_CYCLE;
 import static org.firstinspires.ftc.teamcode.xcentrics.robots.RobotConfig.TELEMETRY_CYCLE;
+import static org.firstinspires.ftc.teamcode.xcentrics.robots.RobotConfig.isRed;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.telemetry.PanelsTelemetry;
@@ -197,5 +198,13 @@ public class Robot {
          * Add a warning to be displayed on the phone for when something is amiss and the robot should not be run
          */
         warnings.add(warning);
+    }
+
+    /**
+     * used to see what alliance we are on
+     * @return boolean
+     */
+    public boolean isRed(){
+        return isRed;
     }
 }

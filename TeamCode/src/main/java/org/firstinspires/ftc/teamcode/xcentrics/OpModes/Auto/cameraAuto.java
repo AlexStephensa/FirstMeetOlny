@@ -10,6 +10,7 @@ public class cameraAuto extends LiveAutoBase{
     public static int state = -1;
     @Override
     public void on_init() {
+
         if(isRed){
             paths = new AutoPathsRed(robot.follower);
         } else {
