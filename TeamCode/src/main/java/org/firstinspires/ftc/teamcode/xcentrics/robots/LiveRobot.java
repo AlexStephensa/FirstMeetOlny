@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.xcentrics.components.live.Launcher;
 public class LiveRobot extends Robot{
 
     public Follower     follower;
-    public Camera       camera;
+    //public Camera       camera;
     public Intake       intake;
     public Launcher     launcher;
     TelemetryManager    panelsTelemetry;
@@ -25,7 +25,7 @@ public class LiveRobot extends Robot{
     public LiveRobot(LinearOpMode opMode){
         super(opMode);
         follower = Constants.createFollower(hwmap);
-        camera   = new Camera(this);
+       // camera   = new Camera(this);
         intake   = new Intake(this);
         launcher = new Launcher(this);
     }

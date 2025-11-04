@@ -22,6 +22,6 @@ public class robotTuning extends LiveTeleopBase {
 
     @Override
     public void on_loop() {
-
+    robot.updateTelemetry();
     }
 }

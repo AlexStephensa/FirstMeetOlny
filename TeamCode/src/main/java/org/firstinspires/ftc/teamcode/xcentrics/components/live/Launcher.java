@@ -80,9 +80,8 @@ public class Launcher extends Component{
     @Override
     public void startup(){
         super.startup();
-        launcher.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        launcher.motor.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        launcher.motor.setVelocityPIDFCoefficients(P,I,D,F);
     }
 
     @Override

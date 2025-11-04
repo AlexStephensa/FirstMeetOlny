@@ -88,6 +88,7 @@ public class Camera extends Component {
 
     }
     public void shutdown(){
+        super.shutdown();
         cameraOn = false;
         visionPortal.close();
     }
