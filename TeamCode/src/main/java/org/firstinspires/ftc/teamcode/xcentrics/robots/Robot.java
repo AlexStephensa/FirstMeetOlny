@@ -142,7 +142,7 @@ public class Robot {
             for (Component component : components) {
                 component.updateTelemetry(telemetry);
             }
-
+            PanelsTelemetry.INSTANCE.getTelemetry().update();
             telemetry.update();
         }
 

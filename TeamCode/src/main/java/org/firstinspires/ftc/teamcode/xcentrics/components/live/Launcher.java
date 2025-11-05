@@ -9,6 +9,7 @@ import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherC
 import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherConfig.targetSpeed;
 import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherConfig.tolerance;
 
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -17,22 +18,24 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.CRServoQUS;
 import org.firstinspires.ftc.teamcode.xcentrics.util.DcMotorQUS;
 @Configurable
 class LauncherConfig{
-    public static double P = 0;
+    public static double P = 1.6;
     public static double I = 0;
     public static double D = 0;
     public static double F = 0;
     public static int targetSpeed = 0;
     public static int tolerance = 50;
-    public static int idleSpeed = 100;
-    public static int launchSpeed = 1000;
+    public static int idleSpeed = 1000;
+    public static int launchSpeed = 2000;
 }
 public class Launcher extends Component{
     /// Motors ///
@@ -64,10 +67,9 @@ public class Launcher extends Component{
     public void update(OpMode opMode) {
         super.update(opMode);
         //update pidf coefs for flywhee;
-        launcher.motor.setVelocityPIDFCoefficients(P, I, D, F);
+        launcher.motor.setVelocityPIDFCoefficients(P,I,D,F);
         //update target velocity
-        launcher.queue_velocity(targetSpeed);
-        launcher.update();
+        launcher.motor.setVelocity(targetSpeed, AngleUnit.DEGREES);
         //update canLaunch
         canLaunch = (targetSpeed >= targetSpeed + tolerance && targetSpeed <= targetSpeed - tolerance);
         //launch
@@ -80,8 +82,8 @@ public class Launcher extends Component{
     @Override
     public void startup(){
         super.startup();
-        launcher.motor.setDirection(DcMotorSimple.Direction.FORWARD);
         launcher.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        launcher.motor.setVelocityPIDFCoefficients(P,I,D,F);
     }
 
     @Override

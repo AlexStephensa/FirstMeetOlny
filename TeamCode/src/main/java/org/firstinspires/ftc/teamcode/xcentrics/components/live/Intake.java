@@ -15,14 +15,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.DcMotorQUS;
-import com.pedropathing.telemetry.SelectableOpMode;
 
 @Configurable
 class IntakeConfig {
     public static double speed = 0;
 }
 public class Intake extends Component {
-SelectableOpMode selectableOpMode;
+
     /// Motors ///
     private DcMotorQUS intake;
 
@@ -48,7 +47,6 @@ SelectableOpMode selectableOpMode;
     public void update(OpMode opMode){
         super.update(opMode);
         intake.queue_power(speed);
-        intake.update();
     }
     public void startup(){
         super.startup();
