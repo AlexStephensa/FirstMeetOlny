@@ -7,6 +7,7 @@ import android.graphics.Path;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,6 +15,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
+import org.firstinspires.ftc.teamcode.xcentrics.util.CRServoQUS;
 import org.firstinspires.ftc.teamcode.xcentrics.util.DcMotorQUS;
 
 @Configurable
@@ -36,6 +38,7 @@ public class Intake extends Component {
         super.registerHardware(hardwareMap);
         /// Motors ///
         intake = new DcMotorQUS(hardwareMap.get(DcMotorEx.class,"intake"));
+
     }
     public void intake(){
         speed = 0.5;

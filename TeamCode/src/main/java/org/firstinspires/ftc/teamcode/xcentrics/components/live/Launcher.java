@@ -9,7 +9,6 @@ import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherC
 import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherConfig.targetSpeed;
 import static org.firstinspires.ftc.teamcode.xcentrics.components.live.LauncherConfig.tolerance;
 
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -33,7 +32,7 @@ class LauncherConfig{
     public static double D = 0;
     public static double F = 0;
     public static int targetSpeed = 0;
-    public static int tolerance = 50;
+    public static int tolerance = 300;
     public static int idleSpeed = 1000;
     public static int launchSpeed = 2000;
 }
@@ -41,7 +40,7 @@ public class Launcher extends Component{
     /// Motors ///
     public DcMotorQUS launcher;
     /// Servos ///
-    public CRServoQUS feeder;
+    public CRServoQUS f1,f2;
 
     halt halt = new halt();
     public static boolean canLaunch = false,launch = false;
@@ -60,7 +59,9 @@ public class Launcher extends Component{
         launcher = new DcMotorQUS(hardwareMap.get(DcMotorEx.class,"fly"));
 
         /// Servos ///
-        feeder = new CRServoQUS(hardwareMap.get(CRServo.class,"feeder"));
+        /// CRServos ///
+        f1 = new CRServoQUS(hardwareMap.get(CRServo.class,"f1"));
+        f2 = new CRServoQUS(hardwareMap.get(CRServo.class,"f2"));
     }
 
     @Override
@@ -90,12 +91,12 @@ public class Launcher extends Component{
     public void shutdown(){
         super.shutdown();
         launcher.queue_velocity(0);
-        feeder.queue_power(0);
+        feed(0);
     }
     public void launch(){
-        feeder.queue_power(1);
+        feed(1);
         halt.halt(0.5);
-        feeder.queue_power(0);
+        feed(0);
         launch = false;
     }
 
@@ -115,8 +116,13 @@ public class Launcher extends Component{
     public void updateTelemetry(Telemetry telemetry){
         super.updateTelemetry(telemetry);
         addData("Launcher speed: ",launcher.motor.getVelocity());
-        addData("Feeder speed: ",feeder.servo.getPower());
+        addData("F1 speed: ",f1.servo.getPower());
+        addData("F2 speed: ",f2.servo.getPower());
         addData("Can launch: ",canLaunch);
         addData("Launch: ",launch);
+    }
+    private void feed(double speed){
+        f1.queue_power(speed);
+        f2.queue_power(speed);
     }
 }
