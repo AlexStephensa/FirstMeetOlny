@@ -74,7 +74,7 @@ public class Launcher extends Component{
         //update canLaunch
         canLaunch = (targetSpeed >= targetSpeed + tolerance && targetSpeed <= targetSpeed - tolerance);
         //launch
-        if (launch && canLaunch) {
+        if (launch) {
             launch();
         }
     }
@@ -90,7 +90,7 @@ public class Launcher extends Component{
     @Override
     public void shutdown(){
         super.shutdown();
-        launcher.queue_velocity(0);
+        launcher.motor.setVelocity(0);
         feed(0);
     }
     public void launch(){
@@ -123,6 +123,8 @@ public class Launcher extends Component{
     }
     private void feed(double speed){
         f1.queue_power(speed);
-        f2.queue_power(speed);
+        f2.queue_power(-speed);
+        f1.update();
+        f2.update();
     }
 }

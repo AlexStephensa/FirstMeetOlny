@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.xcentrics.paths.TeleOpPaths;
-@TeleOp(name = "TeleOpLive")
+@TeleOp(name = "TeleOpDead")
 public class TeleOpLive extends LiveTeleopBase{
     private TeleOpPaths paths;
     private static boolean autoDrive = false;
@@ -15,6 +15,7 @@ public class TeleOpLive extends LiveTeleopBase{
     @Override
     public void on_start() {
     robot.follower.startTeleOpDrive();
+    robot.follower.setMaxPower(0.7);
     }
 
     @Override
@@ -42,9 +43,14 @@ public class TeleOpLive extends LiveTeleopBase{
 
         //teleop controls
        // if(!autoDrive) {
-            robot.follower.setTeleOpDrive(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
+            robot.follower.setTeleOpDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x,-gamepad1.right_stick_x);
         //}
-
+        //slow down bumber
+        if(gamepad1.right_bumper){
+            robot.follower.setMaxPower(0.3);
+        } else {
+            robot.follower.setMaxPower(0.7);
+        }
         //spin up launcher
         if(gamepad2.right_bumper){
             robot.launcher.spinUp();
@@ -63,10 +69,10 @@ public class TeleOpLive extends LiveTeleopBase{
         //intake forward
         if(gamepad2.y){
             robot.intake.intake();
-        }
-        //intake reverse
-        if(gamepad2.x){
+        }else if(gamepad2.x){
             robot.intake.reverseIntake();
+        } else {
+            robot.intake.stopIntake();
         }
 
 

@@ -53,6 +53,7 @@ public class Intake extends Component {
     public void update(OpMode opMode){
         super.update(opMode);
         intake.queue_power(speed);
+        intake.update();
     }
     public void startup(){
         super.startup();
